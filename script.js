@@ -35,6 +35,66 @@ enterButton.addEventListener("click", () => {
 
 
 /* =========================================
+   MÚSICA DE FONDO
+========================================= */
+
+const bgMusic =
+    document.getElementById("bgMusic");
+
+const musicButton =
+    document.getElementById("musicButton");
+
+const musicIcon =
+    document.getElementById("musicIcon");
+
+
+function playMusic() {
+
+    bgMusic.volume = 0.5;
+
+    bgMusic.play()
+        .then(() => {
+
+            musicIcon.textContent = "🔊";
+
+            musicButton.classList.add("playing");
+
+        })
+        .catch(() => {
+
+            musicIcon.textContent = "🔇";
+
+        });
+
+}
+
+
+function toggleMusic() {
+
+    if (bgMusic.paused) {
+
+        playMusic();
+
+    } else {
+
+        bgMusic.pause();
+
+        musicIcon.textContent = "🔇";
+
+        musicButton.classList.remove("playing");
+
+    }
+
+}
+
+
+musicButton.addEventListener("click", toggleMusic);
+
+// Iniciar música al entrar a la fiesta
+enterButton.addEventListener("click", playMusic);
+
+
+/* =========================================
    MENÚ MÓVIL
 ========================================= */
 
