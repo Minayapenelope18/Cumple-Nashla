@@ -498,12 +498,6 @@ rsvpForm.addEventListener(
                 .trim();
 
 
-        const guests =
-            document
-                .getElementById("guests")
-                .value;
-
-
         const attendance =
             document.querySelector(
                 'input[name="asistencia"]:checked'
@@ -554,8 +548,6 @@ rsvpForm.addEventListener(
         const data = {
 
             nombre: name,
-
-            personas: guests,
 
             asistencia: attendance.value,
 
@@ -610,10 +602,6 @@ rsvpForm.addEventListener(
 
                     Tu confirmación fue registrada
                     correctamente.
-                    <br><br>
-
-                    👥 Personas:
-                    <strong>${escapeHTML(guests)}</strong>
                     `;
 
                 createConfetti();
