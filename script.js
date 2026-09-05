@@ -20,18 +20,195 @@ const mainContent =
     document.getElementById("mainContent");
 
 
-enterButton.addEventListener("click", () => {
+enterButton.addEventListener("click", handleEnterParty);
 
-    welcomeScreen.classList.add("hide");
 
-    mainContent.classList.remove("hidden");
+function handleEnterParty() {
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+    // Evitar que se dispare dos veces (click + touchend)
+    if (enterButton.disabled) return;
 
-});
+    enterButton.disabled = true;
+
+
+    // 1) Disparar confeti y brillos sobre la pantalla de bienvenida
+    burstConfetti(entranceEffects, 90);
+
+    burstSparkles(entranceEffects, 24);
+
+
+    // 2) Después de un instante, revelar la invitación
+    setTimeout(() => {
+
+        welcomeScreen.classList.add("hide");
+
+        mainContent.classList.remove("hidden");
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }, 550);
+
+
+    // 3) Limpiar el efecto de entrada una vez termina
+    setTimeout(() => {
+
+        entranceEffects.innerHTML = "";
+
+    }, 2200);
+
+}
+
+
+const entranceEffects =
+    document.getElementById("entranceEffects");
+
+
+const burstColors = [
+
+    "#ff9fd0",
+    "#ff4fb0",
+    "#b07bf0",
+    "#c9a9f5",
+    "#6fc8ff",
+    "#ffffff"
+
+];
+
+
+const sparkleEmojis = [
+    "✨", "💖", "⭐", "💎", "🌸"
+];
+
+
+function burstConfetti(container, amount) {
+
+    for (let i = 0; i < amount; i++) {
+
+        const piece =
+            document.createElement("div");
+
+        piece.classList.add("confetti");
+
+
+        const angle =
+            Math.random() * Math.PI * 2;
+
+        const distance =
+            120 + Math.random() * 260;
+
+        const burstX =
+            Math.cos(angle) * distance;
+
+        const burstY =
+            Math.sin(angle) * distance;
+
+
+        piece.style.setProperty(
+            "--burst-x",
+            burstX + "px"
+        );
+
+        piece.style.setProperty(
+            "--burst-y",
+            burstY + "px"
+        );
+
+
+        piece.style.backgroundColor =
+            burstColors[
+                Math.floor(
+                    Math.random() * burstColors.length
+                )
+            ];
+
+
+        piece.style.width =
+            Math.random() * 8 + 6 + "px";
+
+        piece.style.height =
+            Math.random() * 8 + 6 + "px";
+
+        piece.style.borderRadius =
+            Math.random() > 0.5 ? "50%" : "2px";
+
+        piece.style.animationDelay =
+            Math.random() * 0.15 + "s";
+
+
+        container.appendChild(piece);
+
+
+        setTimeout(
+            () => piece.remove(),
+            1800
+        );
+
+    }
+
+}
+
+
+function burstSparkles(container, amount) {
+
+    for (let i = 0; i < amount; i++) {
+
+        const sparkle =
+            document.createElement("span");
+
+        sparkle.classList.add("sparkle-burst");
+
+        sparkle.textContent =
+            sparkleEmojis[
+                Math.floor(
+                    Math.random() * sparkleEmojis.length
+                )
+            ];
+
+
+        const angle =
+            Math.random() * Math.PI * 2;
+
+        const distance =
+            100 + Math.random() * 220;
+
+        const burstX =
+            Math.cos(angle) * distance;
+
+        const burstY =
+            Math.sin(angle) * distance;
+
+
+        sparkle.style.setProperty(
+            "--burst-x",
+            burstX + "px"
+        );
+
+        sparkle.style.setProperty(
+            "--burst-y",
+            burstY + "px"
+        );
+
+        sparkle.style.fontSize =
+            Math.random() * 14 + 16 + "px";
+
+        sparkle.style.animationDelay =
+            Math.random() * 0.2 + "s";
+
+
+        container.appendChild(sparkle);
+
+
+        setTimeout(
+            () => sparkle.remove(),
+            1700
+        );
+
+    }
+
+}
 
 
 /* =========================================
@@ -126,6 +303,7 @@ musicButton.addEventListener("touchend", toggleMusic);
 // Iniciar música al entrar a la fiesta (click y touch, para cubrir todos los navegadores móviles)
 enterButton.addEventListener("click", unlockAudio);
 enterButton.addEventListener("touchend", unlockAudio);
+enterButton.addEventListener("touchend", handleEnterParty);
 
 // Respaldo: si por algún motivo el audio no arrancó, se intenta
 // de nuevo con el primer toque en cualquier parte de la página
