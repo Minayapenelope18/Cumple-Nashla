@@ -3,14 +3,17 @@
 ========================================= */
 
 :root {
-    --dark: #15121d;
-    --dark-alt: #1c1726;
-    --pink: #f7a8d0;
-    --pink-strong: #ed4fa3;
-    --purple: #9b6bd3;
-    --purple-deep: #5c315f;
-    --silver: #d9d9e2;
+    --dark: #201835;
+    --dark-alt: #2b2049;
+    --pink: #ff9fd0;
+    --pink-strong: #ff4fb0;
+    --purple: #b07bf0;
+    --purple-deep: #6a3aa0;
+    --silver: #e4e0ef;
     --white: #ffffff;
+
+    --lilac: #c9a9f5;
+    --blue: #6fc8ff;
 
     --font-display: 'Playfair Display', serif;
     --font-body: 'Montserrat', sans-serif;
@@ -85,7 +88,7 @@ img {
 
 .main-button {
     display: inline-block;
-    background: linear-gradient(120deg, var(--pink-strong), var(--purple));
+    background: linear-gradient(120deg, var(--pink-strong), var(--purple), var(--blue));
     color: var(--white);
     border: none;
     font-family: var(--font-body);
@@ -141,8 +144,10 @@ section {
     align-items: center;
     justify-content: center;
     background:
-        radial-gradient(circle at 30% 20%, rgba(155, 107, 211, 0.35), transparent 55%),
-        radial-gradient(circle at 75% 80%, rgba(237, 79, 163, 0.3), transparent 55%),
+        radial-gradient(circle at 20% 20%, rgba(176, 123, 240, 0.45), transparent 55%),
+        radial-gradient(circle at 80% 15%, rgba(201, 169, 245, 0.35), transparent 50%),
+        radial-gradient(circle at 75% 85%, rgba(255, 79, 176, 0.4), transparent 55%),
+        radial-gradient(circle at 15% 80%, rgba(111, 200, 255, 0.3), transparent 50%),
         var(--dark);
     text-align: center;
     transition: opacity 0.7s ease, visibility 0.7s ease;
@@ -269,8 +274,10 @@ section {
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(circle at 20% 15%, rgba(155, 107, 211, 0.25), transparent 50%),
-        radial-gradient(circle at 80% 85%, rgba(237, 79, 163, 0.22), transparent 50%);
+        radial-gradient(circle at 20% 15%, rgba(176, 123, 240, 0.3), transparent 50%),
+        radial-gradient(circle at 80% 85%, rgba(255, 79, 176, 0.28), transparent 50%),
+        radial-gradient(circle at 85% 20%, rgba(201, 169, 245, 0.25), transparent 45%),
+        radial-gradient(circle at 15% 85%, rgba(111, 200, 255, 0.22), transparent 45%);
     z-index: 0;
 }
 
@@ -316,7 +323,7 @@ section {
     font-weight: 800;
     font-size: clamp(24px, 3.5vw, 32px);
     letter-spacing: 8px;
-    background: linear-gradient(90deg, var(--pink), var(--purple));
+    background: linear-gradient(90deg, var(--pink), var(--lilac), var(--purple), var(--blue));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -380,8 +387,8 @@ section {
 }
 
 .time-card {
-    background: rgba(155, 107, 211, 0.1);
-    border: 1px solid rgba(247, 168, 208, 0.25);
+    background: rgba(176, 123, 240, 0.12);
+    border: 1px solid rgba(255, 159, 208, 0.3);
     border-radius: 16px;
     padding: 22px 20px;
     min-width: 90px;
@@ -393,6 +400,11 @@ section {
     font-size: 40px;
     color: var(--pink);
 }
+
+.time-card:nth-child(1) span { color: var(--pink); }
+.time-card:nth-child(2) span { color: var(--purple); }
+.time-card:nth-child(3) span { color: var(--blue); }
+.time-card:nth-child(4) span { color: var(--lilac); }
 
 .time-card small {
     font-size: 13px;
@@ -459,14 +471,19 @@ section {
 }
 
 .detail-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(217, 217, 226, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(228, 224, 239, 0.14);
     border-radius: 18px;
     padding: 34px 20px;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.detail-card:hover {
+    transform: translateY(-6px);
 }
 
 .detail-icon {
-    font-size: 30px;
+    font-size: 32px;
     margin-bottom: 14px;
 }
 
@@ -477,6 +494,18 @@ section {
     color: var(--purple);
     margin-bottom: 10px;
 }
+
+.detail-card:nth-child(1) { border-color: rgba(255, 159, 208, 0.35); }
+.detail-card:nth-child(1) h3 { color: var(--pink); }
+
+.detail-card:nth-child(2) { border-color: rgba(201, 169, 245, 0.4); }
+.detail-card:nth-child(2) h3 { color: var(--lilac); }
+
+.detail-card:nth-child(3) { border-color: rgba(111, 200, 255, 0.35); }
+.detail-card:nth-child(3) h3 { color: var(--blue); }
+
+.detail-card:nth-child(4) { border-color: rgba(176, 123, 240, 0.4); }
+.detail-card:nth-child(4) h3 { color: var(--purple); }
 
 .detail-card p {
     font-size: 17px;
@@ -506,7 +535,7 @@ section {
 ========================================= */
 
 .katseye-section {
-    background: linear-gradient(135deg, var(--purple-deep), var(--dark));
+    background: linear-gradient(135deg, var(--purple-deep), var(--dark) 60%, var(--dark-alt));
     text-align: center;
 }
 
@@ -515,7 +544,7 @@ section {
     font-weight: 800;
     font-size: clamp(40px, 9vw, 72px);
     letter-spacing: 10px;
-    background: linear-gradient(90deg, var(--pink), var(--white));
+    background: linear-gradient(90deg, var(--pink), var(--lilac), var(--blue));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -920,6 +949,74 @@ footer h3 {
         transform: translateY(105vh) rotate(360deg);
         opacity: 0.8;
     }
+}
+
+
+/* =========================================
+   EFECTO DE ENTRADA (confeti + brillos)
+========================================= */
+
+.entrance-effects {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1001;
+    overflow: hidden;
+}
+
+.entrance-effects .confetti {
+    top: 50%;
+    left: 50%;
+    animation: entranceConfettiBurst 1.4s ease-out forwards;
+}
+
+@keyframes entranceConfettiBurst {
+
+    0% {
+        transform: translate(-50%, -50%) scale(0.4);
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translate(
+                calc(-50% + var(--burst-x, 0px)),
+                calc(-50% + var(--burst-y, 0px))
+            )
+            rotate(540deg)
+            scale(1);
+        opacity: 0;
+    }
+
+}
+
+.sparkle-burst {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 22px;
+    opacity: 0;
+    animation: sparkleBurst 1.3s ease-out forwards;
+}
+
+@keyframes sparkleBurst {
+
+    0% {
+        transform: translate(-50%, -50%) scale(0.3) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translate(
+                calc(-50% + var(--burst-x, 0px)),
+                calc(-50% + var(--burst-y, 0px))
+            )
+            scale(1.4)
+            rotate(180deg);
+        opacity: 0;
+    }
+
 }
 
 
