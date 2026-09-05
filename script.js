@@ -47,6 +47,36 @@ const musicButton =
 const musicIcon =
     document.getElementById("musicIcon");
 
+let audioUnlocked = false;
+
+
+/* Desbloquea el audio en móviles (iOS/Safari exige que el
+   primer play() ocurra directamente dentro de un gesto táctil) */
+
+function unlockAudio() {
+
+    if (audioUnlocked) return;
+
+    bgMusic.volume = 0.5;
+
+    bgMusic.play()
+        .then(() => {
+
+            audioUnlocked = true;
+
+            musicIcon.textContent = "🔊";
+
+            musicButton.classList.add("playing");
+
+        })
+        .catch(() => {
+
+            audioUnlocked = false;
+
+        });
+
+}
+
 
 function playMusic() {
 
@@ -54,6 +84,8 @@ function playMusic() {
 
     bgMusic.play()
         .then(() => {
+
+            audioUnlocked = true;
 
             musicIcon.textContent = "🔊";
 
@@ -89,9 +121,25 @@ function toggleMusic() {
 
 
 musicButton.addEventListener("click", toggleMusic);
+musicButton.addEventListener("touchend", toggleMusic);
 
-// Iniciar música al entrar a la fiesta
-enterButton.addEventListener("click", playMusic);
+// Iniciar música al entrar a la fiesta (click y touch, para cubrir todos los navegadores móviles)
+enterButton.addEventListener("click", unlockAudio);
+enterButton.addEventListener("touchend", unlockAudio);
+
+// Respaldo: si por algún motivo el audio no arrancó, se intenta
+// de nuevo con el primer toque en cualquier parte de la página
+document.body.addEventListener("touchend", function firstTouch() {
+
+    if (!audioUnlocked) {
+
+        unlockAudio();
+
+    }
+
+    document.body.removeEventListener("touchend", firstTouch);
+
+});
 
 
 /* =========================================
